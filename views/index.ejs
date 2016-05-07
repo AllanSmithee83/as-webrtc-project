@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <title>WebRTC Project</title>
+	
+    <!-- Bootstrap -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+	 <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+	<script src="/socket.io/socket.io.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+	<!-- This is the top level navigation, it stays visible throughout the app -->
+    <nav class="navbar navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+		<!--http://www.quackit.com/javascript/tutorial/javascript_void_0.cfm  -->
+          <a class="navbar-brand" href="javascript:void(0)"><i class="fa fa-skyatlas"></i> Dial webRTC</a>
+        </div>
+        <ul class="nav navbar-nav menu-right">
+          <li><a href="https://github.com/AllanSmithee83">@AllanSmithee</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+	<!-- This is the initial landing page where you choose to enter as a caller -->
+    <div id="landingPage" class="mastHead landing-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2 ">
+            <div class="starter-text">
+              <h1><strong>WebRTC</strong> Project</h1>
+            </div>
+            <div class="starter-call-to-action">
+              <a href="" id="enterAsCaller1" class="call-group">Enter As Caller1</a>
+              <a href="" id="enterAsCaller2" class="call-group">Enter As Caller2</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	<!-- CALLER1 -->
+    <div id="caller1Entry" class="mastHead" style="display: none;">
+      <div class="signin-to-app">
+        <h2>Welcome to WebRTC</h2>
+        
+        <div id="requestCaller2Form">
+		  <p>We will connect you after you<br>tell us some basic information…</p>
+		  
+		  <form class="form-inline">
+            <div class="form-group">
+              <input id="caller1Name" class="input-styled" type="text" class="form-control" id="caller2Name" value="Your Name">
+              <button id="requestCaller2" class="input-styled" type="button">Request a Caller2</button>
+            </div>
+          </form>
+		</div>
+		
+        <div id="waitingForCaller2" class="loading-wrap" style="display: none;">
+          <span>Waiting for a caller2 to arrive...</span>
+          <div class="progress">
+            <div id="waitingForCaller2Progress" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+        </div>
+		
+        <div id="caller2Listing" class="caller2-info" style="display: none;">
+        
+            <span class="name">Caller2 will see you now!</span>
+            <button id="callCaller2" class="input-styled" type="button">Call </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+	
+	
+	<!-- CALLER2 -->
+		
+    <div id="caller2Signup" class="mastHead" style="display: none;">
+      <div class="signin-to-app signin-caller2">
+        <h2>Welcome to WebRTC</h2>
+        <p>There are probably someone waiting to talk with you.<br><small>Just enter your name and press the button to wait for a call!</small></p>
+        
+		<div id="caller2SignupForm">
+          <form class="form-inline">
+            <div class="form-group">
+              <input class="input-styled" type="text" class="form-control" id="caller2Name" value="Your Name">
+              <button id="caller2SignupButton" class="input-styled" type="button">Wait for call</button>
+            </div>
+          </form>
+		</div>
+		
+        <div id="waitingForCaller1" class="loading-wrap" style="display: none;">
+          <span>Waiting for someone to contact you...</span>
+          <div class="progress">
+            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+	
+	
+	<!-- VIDEO CHAT ROOM -->
+			
+				
+    <div id="videoPage" class="mastHead" style="display: none;">
+      <div class="video-holder video-holder-horizontal">
+        <div class="left">
+          <div class="video-wrap">
+            <div id="mainVideoTag" class="main-video" autoplay>
+              <video class=""></video>
+            </div>
+            <div id="smallVideoTag" class="small-video" autoplay muted="muted">
+              <video></video>
+            </div>
+          </div>
+          
+          <div class="actions-holder">
+            <a id="muteMyself" class="input-styled" href="javascript:void(0)">Mute Myself</a>
+            <a id="pauseVideo" class="input-styled" href="javascript:void(0)">Pause Video</a>
+            
+          </div>
+
+          <form class="send-file form-inline">
+			<div class="form-group" style="margin: 0 auto;">
+				<input type="file" id="sendFile" style="margin: 0 auto;" /><br/>
+				<progress id="fileProgress" value=“1” max="100"></progress><br/>
+				<a id="receivedFileLink"></a><br/>
+			</div>
+          </form>
+  
+          <form class="send-message form-inline">
+            <div class="form-group">
+			  <input id="myMessage" class="input-styled" type="text" class="form-control" id="" value="">
+			  <button id="sendMessage" class="input-styled" type="button">Send Message</button>
+            </div>
+          </form>
+        </div>
+		
+		
+        <!-- MESSAGES CHAT ROOM -->
+		
+       <div class="right">
+  
+          <div id="messageHolder" class="message-holder">
+			<div id="messageInName" class="message-in"></div>
+			<div id="messageOutName" class="message-out"></div>
+          </div>
+        </div>
+           
+
+		<!--  <div class="message-in">
+              <span>This is a message This is a message This is a message This is a message This is a message <a href="#">hello link</a></span>
+            </div>
+            <div class="message-out">
+              <span>This is a message</span>
+            </div>
+            <div class="message-in">
+              <span>This is a message</span>
+            </div>
+            <div class="message-out">
+              <span>This is a message</span>
+            </div>
+            <div class="message-in">
+              <span>This is a message</span>
+            </div>
+            <div class="message-out">
+              <span>This is a message</span>
+            </div>
+            <div class="message-in">
+              <span>This is a message</span>
+            </div>
+            <div class="message-out">
+              <span>This is a message</span>
+            </div>
+            <div class="message-in">
+              <span>This is a message</span>
+            </div>
+            <div class="message-out">
+              <span>This is a message</span>
+            </div>
+            <div class="message-in">
+              <span>This is a message</span>
+            </div>
+            <div class="message-out">
+              <span>This is a message</span>
+            </div>
+            <div class="message-in">
+              <span>This is a message</span>
+            </div>
+            <div class="message-out">
+              <span>This is a message</span>
+            </div>
+            <div class="message-in">
+              <span>This is a message</span>
+            </div>
+            <div class="message-out">
+              <span>This is a message</span>
+            </div>
+          </div>
+        </div>
+        -->
+      </div>
+    </div>
+
+<footer>
+	<p>WebRTC Project &copy 2015 | AlanSMithee <a href="#">Privacy</a></p>
+	</footer>	
+	
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+   
+    <script src="js/bootstrap.min.js"></script>
+	
+	<!-- Our project javascript files -->
+	<script src="js/webrtc.js"></script> 
+	<script src="js/app.js"></script> 
+  </body>
+</html>

@@ -1,0 +1,268 @@
+
+html{
+	position: relative;
+	min-height:100%;
+}
+
+body{
+  font-family: 'Raleway', sans-serif;
+}
+
+.input-styled{
+  display: inline-block;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 0 20px;
+  height: 50px;
+}
+
+/*Header*/
+
+.navbar{
+    border: none;
+}
+.navbar-brand{
+  height: 60px;
+  padding: 20px;
+  color: #fff;
+}
+.navbar-brand:hover{
+  color: #fff;
+}
+.navbar-nav>li>a{
+  line-height: 30px;
+  color: #fff;
+}
+.navbar-nav>li a:hover{	
+ background: rgba(255, 255, 255, 0.1);
+}
+.menu-right{
+  float: right;
+}
+
+
+/*Maste Head And Landing Text*/
+
+.mastHead{
+    padding: 100px 0 40px;
+    color: #fff;
+	text-align: center;
+	
+}
+
+.mastHead.landing-page{
+	
+  padding-top: 200px;  
+  min-height: 550px;
+}
+.starter-call-to-action{
+  margin: 10px auto 0;
+  text-align: center;
+}
+.starter-call-to-action .call-group{
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.4);
+  line-height: 60px;
+  padding: 0 30px;
+  color: #fff;
+  margin: 0 10px;  
+  text-decoration: none;
+}
+.starter-call-to-action .call-group:hover{
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/*Sign In*/
+
+.signin-to-app{
+  display: inline-block;
+  width: auto;
+  min-width: 550px;
+  min-height:340px;
+  margin: 60px auto;
+  padding:0 20px 80px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.signin-to-app h2{
+  line-height: 80px;
+  margin: 0 -20px 40px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.signin-to-app p{
+  font-size: 20px;
+  padding: 10px 20px;
+}
+.signin-to-app form{
+  display: inline-block;
+}
+.signin-to-app form input[type="text"],
+.signin-to-app form button{
+  margin: 5px 2px 0;
+  width: 240px;
+  width: 240px;
+  vertical-align: bottom;
+  color: #fff;
+}
+.signin-to-app form button{
+  width: auto;
+  line-height: 50px;
+  background: #8EB63B;
+}
+.signin-to-app form button:hover{
+  background: #739a23;
+}
+.signin-caller2 form input[type="text"],
+.signin-caller2 form button{
+  width: 200px;
+}
+/*Loading*/
+
+.loading-wrap{
+  display: inline-block;
+  padding: 10px 40px 15px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.loading-wrap .progress{
+  margin: 10px auto 0;
+}
+
+
+/*Video Page*/
+
+.video-holder{
+  background: rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  margin-top: 50px;
+}
+.video-holder .video-wrap{
+  width: 550px;
+  height: 380px;
+  position: relative;
+}
+.video-wrap video{
+  width: 100%;
+  height: 100%;
+}
+.video-holder .video-wrap .main-video,
+.video-holder .video-wrap .small-video{
+  position: absolute;
+  background: #181818;
+}
+.video-holder .video-wrap .main-video{
+  background: #000000;
+}
+
+.video-holder .video-wrap .main-video{
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;  
+}
+.video-holder .video-wrap .small-video{
+  bottom:0;
+  right: 0;
+  width: 180px;
+  height: 120px;
+  border-left: 1px solid #888;
+  border-top: 1px solid #888;
+}
+.video-holder .actions-holder{
+  padding: 10px;
+}
+.video-holder .actions-holder a{
+  line-height: 50px;
+  color: #fff;
+  margin: 0 5px;
+  background: rgba(0, 0, 0, 0.5);
+  width: 160px;
+}
+.send-file,
+.send-message{
+  margin-bottom: 10px;
+}
+.send-file input[type="text"],
+.send-message input[type="text"]{
+  width: 300px;
+  margin-right: 5px;
+
+}
+
+.send-file input, textarea{
+	color:red !important;
+}
+.send-file button{
+  width: 200px;
+  background: #8EB63B;
+}
+.send-file button:hover{
+  background: #739a23;
+}
+.send-message button{
+  width: 200px;
+  background: #0FB6DD;
+}
+.send-message button:hover{
+  background: #0b8eab;
+}
+
+
+
+/*Messages Box*/
+.message-holder{
+  display: inline-block;
+  width: 508px;
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  height: 320px;
+  overflow-x: scroll;
+}
+.message-holder .message-in,
+.message-holder .message-out{
+  display: block;
+  text-align: left;
+} 
+.message-holder .message-in span,
+.message-holder .message-out span{
+  display: inline-block;
+  padding: 6px 8px;
+  margin: 4px 0;
+  width: 80%;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 12px;
+  line-height: 14px;
+}
+.message-holder .message-in span a,
+.message-holder .message-out span a{
+  color:#A5F008;
+}
+.message-holder .message-out{
+  text-align: right;
+}
+
+/*Video Page*/
+.video-holder-horizontal .left,
+.video-holder-horizontal .right{
+  float: left;
+}
+.video-holder-horizontal .right{
+  width: 250px;
+}
+.video-holder-horizontal .right .message-holder{
+  width: 100%;
+  height: 565px;
+}
+.video-holder-horizontal .right .message-holder{
+  border: none;
+  background: #2F2D2E;
+}
+
+footer{
+	
+	text-align:center;
+	padding-top:20px;
+	margin-top:50px;
+	position:absolute;
+	bottom:0;
+	 width:100%;
+}
